@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">📋 รายการจองห้องเรียน</h2>
+
+<table class="table table-striped table-bordered">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>ผู้จอง</th>
+
+            <th>อาคาร</th>
+
+            <th>ห้อง</th>
+
+            <th>วันที่</th>
+
+            <th>เวลา</th>
+
+            <th>จัดการ</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for booking in bookings %}
+
+        <tr>
+
+            <td>{{ booking.name }}</td>
+
+            <td>{{ booking.building }}</td>
+
+            <td>{{ booking.room }}</td>
+
+            <td>{{ booking.date }}</td>
+
+            <td>{{ booking.start_time }} - {{ booking.end_time }}</td>
+
+            <td>
+
+                <a
+                href="/delete/{{ booking.id }}"
+                class="btn btn-danger btn-sm"
+                onclick="return confirm('ต้องการยกเลิกการจองใช่หรือไม่?')">
+
+                ยกเลิก
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="/" class="btn btn-secondary">
+
+← กลับหน้าหลัก
+
+</a>
+
+{% endblock %}

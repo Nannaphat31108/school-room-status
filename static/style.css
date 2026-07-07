@@ -1,0 +1,51 @@
+body{
+
+    background:#f4f6f9;
+
+}
+
+.card{
+
+    border:none;
+
+    border-radius:15px;
+
+}
+
+.card:hover{
+
+    transform:scale(1.03);
+
+    transition:0.3s;
+
+}
+
+table{
+
+    background:white;
+
+}
+
+h2{
+
+    font-weight:bold;
+
+}
+
+.navbar{
+
+    box-shadow:0 3px 8px rgba(0,0,0,.2);
+
+}
+
+.btn{
+
+    border-radius:10px;
+
+}
+
+.badge{
+
+    font-size:15px;
+
+}

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{ building }}</h2>
+
+<a href="/" class="btn btn-secondary mb-3">
+← กลับหน้าหลัก
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-primary">
+
+        <tr>
+
+            <th>ห้อง</th>
+
+            <th>สถานะ</th>
+
+            <th>ผู้จอง</th>
+
+            <th>จัดการ</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for room in rooms %}
+
+        <tr>
+
+            <td>{{ room.room }}</td>
+
+            <td>
+
+                {% if room.status=="ว่าง" %}
+
+                    <span class="badge bg-success">
+
+                        🟢 ว่าง
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-danger">
+
+                        🔴 ไม่ว่าง
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {{ room.name }}
+
+            </td>
+
+            <td>
+
+                {% if room.status=="ว่าง" %}
+
+                <a
+                href="/booking/{{ building }}/{{ room.room }}"
+                class="btn btn-primary">
+
+                จองห้อง
+
+                </a>
+
+                {% else %}
+
+                <button
+                class="btn btn-secondary"
+                disabled>
+
+                ถูกจองแล้ว
+
+                </button>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
