@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -27,6 +28,7 @@ buildings = {
         "641","642","643","644","645","646","647","648"
     ]
 }
+
 
 # --------------------------
 # เชื่อมต่อฐานข้อมูล
@@ -127,13 +129,10 @@ def rooms(building):
     conn.close()
 
     return render_template(
-
-        "rooms.html",
-
-        building=building,
-
-        rooms=room_list
-
+    "rooms.html",
+    building=building,
+    rooms=room_list,
+    today=thai_date()
     )
 
 
@@ -147,7 +146,7 @@ def booking(building, room):
 
         name = request.form["name"]
 
-        date = today
+        date = thai_date()
 
         start = request.form["start"]
 
@@ -198,14 +197,11 @@ def booking(building, room):
         )
 
     return render_template(
-
-        "booking.html",
-
-        building=building,
-
-        room=room
-
-    )
+    "booking.html",
+    building=building,
+    room=room,
+    today=thai_date()
+)
 
 
 # --------------------------
@@ -267,3 +263,19 @@ if __name__ == "__main__":
 from datetime import datetime
 
 today = datetime.now().strftime("%d/%m/%Y")
+def thai_date():
+    months = [
+        "",
+        "มกราคม", "กุมภาพันธ์", "มีนาคม",
+        "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน",
+        "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    ]
+
+    now = datetime.now()
+
+    day = now.day
+    month = months[now.month]
+    year = now.year + 543
+
+    return f"{day} {month} {year}"
